@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gantt — Stage IA RAG · Maroclear 2026</title>
+<title>Gantt — Agent Conversationnel IA · Maroclear 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -17,15 +17,12 @@
   --muted2:  #4e5b7a;
   --accent:  #3451b2;
   --accent2: #4263eb;
-
   --c0:#2c4a9e; --c1:#1864ab; --c2:#1578b8;
   --c3:#0d8a9a; --c4:#2b6cb0; --c5:#3d5a99;
   --c6:#1e40af; --c7:#1d6b52; --c8:#5046e5; --c9:#4a5568;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh}
-
-/* HEADER */
 header{background:var(--bg2);border-bottom:1px solid var(--border2);padding:34px 48px 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .header-left{flex:1;min-width:240px}
 .badge{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(52,81,178,.07);border:1px solid rgba(52,81,178,.18);padding:4px 10px;border-radius:4px;margin-bottom:12px}
@@ -37,8 +34,6 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .stat{text-align:right}
 .stat-val{font-size:22px;font-weight:700;color:var(--text)}
 .stat-lbl{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em}
-
-/* CONTROLS */
 .controls{background:var(--bg2);padding:12px 48px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
 .ctrl-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-right:2px}
 .filter-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:4px 11px;border-radius:4px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;transition:all .18s;white-space:nowrap}
@@ -46,8 +41,6 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .filter-btn.active{background:rgba(52,81,178,.09);border-color:var(--accent);color:var(--accent);font-weight:600}
 .toggle-all{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:4px 13px;border-radius:4px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .18s}
 .toggle-all:hover{color:var(--text);background:var(--bg3)}
-
-/* GANTT */
 .gantt-table{display:flex;flex-direction:column;overflow-x:auto}
 .gantt-header-row{display:flex;align-items:stretch;border-bottom:1.5px solid var(--border2);position:sticky;top:0;z-index:20;background:var(--bg2)}
 .label-col{width:296px;min-width:296px;flex-shrink:0;padding:11px 16px 11px 48px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;border-right:1px solid var(--border2)}
@@ -56,13 +49,10 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .month-cell:last-child{border-right:none}
 .week-ticks{display:flex;position:absolute;bottom:0;left:0;right:0;height:3px}
 .week-tick{flex:1;border-right:1px solid rgba(30,50,120,.04)}
-
-/* PHASE GROUP */
 .phase-group{border-bottom:1px solid var(--border)}
 .phase-group.hidden{display:none}
 .phase-row{display:flex;align-items:stretch;cursor:pointer;min-height:48px;transition:background .15s}
 .phase-row:hover{background:rgba(52,81,178,.025)}
-
 .phase-label{width:296px;min-width:296px;flex-shrink:0;padding:0 14px 0 48px;display:flex;align-items:center;gap:9px;border-right:1px solid var(--border)}
 .phase-accent-bar{width:3px;height:26px;border-radius:2px;flex-shrink:0}
 .phase-index{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);width:14px;flex-shrink:0}
@@ -70,39 +60,26 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .phase-count{font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:10px;background:var(--bg3);color:var(--muted);flex-shrink:0}
 .phase-chevron{font-size:8px;color:var(--muted);transition:transform .25s;flex-shrink:0}
 .phase-group.open .phase-chevron{transform:rotate(90deg)}
-
 .phase-bar-col{flex:1;min-width:0;position:relative;display:flex;align-items:center}
 .phase-bar{position:absolute;height:22px;border-radius:4px;display:flex;align-items:center;padding:0 10px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.03em;color:#fff;white-space:nowrap;overflow:hidden;transition:height .15s,opacity .15s;cursor:pointer}
 .phase-bar:hover{height:28px;opacity:.88}
-
-/* GRID */
 .grid-overlay{position:absolute;inset:0;pointer-events:none;display:flex}
 .grid-v{flex:1;border-right:1px solid var(--border)}
 .grid-v:last-child{border-right:none}
-
-/* TODAY — just a thin line + tiny dot, no label */
 .today-line{position:absolute;top:0;bottom:0;width:1.5px;background:rgba(200,30,50,.55);z-index:4;pointer-events:none}
 .today-dot{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:#c81e32;border:2px solid var(--bg2)}
-
-/* DEPENDENCY ARROWS */
 .dep-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:6}
-
-/* TASK ROWS */
 .tasks-wrap{overflow:hidden;max-height:0;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
-.phase-group.open .tasks-wrap{max-height:800px}
+.phase-group.open .tasks-wrap{max-height:900px}
 .task-row{display:flex;align-items:center;min-height:34px;border-top:1px solid rgba(30,50,120,.04);transition:background .1s}
 .task-row:hover{background:rgba(52,81,178,.022)}
-
 .task-label-col{width:296px;min-width:296px;flex-shrink:0;padding:0 14px 0 64px;font-size:11px;color:var(--muted2);line-height:1.35;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .task-num{width:17px;height:17px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:8px;font-weight:600;color:#fff;line-height:1}
 .task-name{flex:1}
-
 .task-bar-col{flex:1;min-width:0;position:relative;height:34px}
 .task-bar{position:absolute;height:10px;border-radius:3px;top:50%;transform:translateY(-50%);transition:height .15s,opacity .15s;cursor:pointer;opacity:.65}
 .task-bar:hover{opacity:1;height:14px}
 .task-bar::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;background:rgba(255,255,255,.45)}
-
-/* MILESTONES */
 .milestones-section{border-bottom:1px solid var(--border)}
 .ms-row{display:flex;align-items:stretch;min-height:60px}
 .ms-label-col{width:296px;min-width:296px;flex-shrink:0;padding:0 14px 0 48px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted2)}
@@ -111,48 +88,63 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .milestone:hover{transform:translate(-50%,-50%) rotate(45deg) scale(1.5)}
 .ms-vline{position:absolute;top:6px;bottom:6px;width:1px;opacity:.18}
 .ms-caption{position:absolute;top:calc(50% + 14px);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.05em;transform:translateX(-50%);white-space:nowrap;font-weight:600}
-
-/* TOOLTIP */
-#tooltip{position:fixed;z-index:9999;pointer-events:none;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px 16px;max-width:250px;display:none;box-shadow:0 8px 28px rgba(30,50,120,.12),0 2px 6px rgba(30,50,120,.06)}
+#tooltip{position:fixed;z-index:9999;pointer-events:none;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px 16px;max-width:280px;display:none;box-shadow:0 8px 28px rgba(30,50,120,.12),0 2px 6px rgba(30,50,120,.06)}
 .tip-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .tip-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
 .tip-dates{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px;letter-spacing:.04em}
 .tip-desc{font-size:11px;color:var(--muted2);line-height:1.55}
-
-/* LEGEND */
+.tip-status{font-size:10px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);color:var(--muted)}
 .legend-section{padding:18px 48px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-top:1px solid var(--border);background:var(--bg2)}
 .legend-title{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-right:4px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted2)}
 .legend-bar{width:16px;height:5px;border-radius:2px}
 .legend-diamond{width:9px;height:9px;transform:rotate(45deg);border-radius:1px;border:1.5px solid #fff}
 .l-today{width:2px;height:13px;background:#c81e32;border-radius:1px}
-.l-arrow{display:flex;align-items:center;gap:3px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2)}
-.l-arrow-line{width:18px;height:1px;background:var(--accent);border-top:1.5px dashed var(--accent);position:relative}
-
-/* PROGRESS */
 .progress-wrap{padding:18px 48px 0}
 .progress-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
 .progress-title{font-size:11px;font-weight:600;color:var(--muted2)}
 .progress-pct{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent)}
 .progress-track{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .6s ease}
-
+.poc-badge{padding:12px 48px;background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(5,150,105,.08));border-left:3px solid #10b981;font-size:11px;color:var(--muted2)}
+.poc-badge strong{color:#065f46}
 .main{display:flex;flex-direction:column;padding-bottom:60px}
+.auto-badge{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:9px;color:#10b981;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:2px 8px;border-radius:4px;margin-left:6px;letter-spacing:.06em}
+.auto-badge::before{content:'⚡'}
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-left">
-    <div class="badge">Stage Data Science · 2026</div>
-    <p class="subtitle">09 FÉV 2026 → 09 AOÛT 2026 &nbsp;·&nbsp; 10 phases &nbsp;·&nbsp; 40 tâches</p>
+    <div class="badge">PFE Data Science · Maroclear</div>
+    <p class="subtitle" id="header-subtitle"></p>
   </div>
   <div class="header-stats">
-    <div class="stat"><div class="stat-val">26</div><div class="stat-lbl">Semaines</div></div>
-    <div class="stat"><div class="stat-val">10</div><div class="stat-lbl">Phases</div></div>
-    <div class="stat"><div class="stat-val" id="stat-progress">—</div><div class="stat-lbl">Avancement</div></div>
+    <div class="stat">
+      <div class="stat-val" id="stat-progression">—</div>
+      <div class="stat-lbl">Progression </div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="stat-days">—</div>
+      <div class="stat-lbl">Jours avant Soutenance</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="stat-date">—</div>
+      <div class="stat-lbl">Date du jour</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="stat-elapsed">—</div>
+      <div class="stat-lbl">Temps écoulé </div>
+    </div>
   </div>
 </header>
+
+<div class="poc-badge">
+   <strong>Stratégie "POC First" :</strong> Simulation React + POCs RAG/Classification validés = 
+  <strong>intégration accélérée</strong>. Stack technique testée (ChromaDB, embeddings, LLMs), 
+  architecture validée, logique métier codée → le reste = scaling + intégration.
+</div>
 
 <div class="controls">
   <span class="ctrl-label">Filtrer :</span>
@@ -162,11 +154,10 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
   <button class="filter-btn" data-filter="2">RAG</button>
   <button class="filter-btn" data-filter="3">NLP</button>
   <button class="filter-btn" data-filter="4">Agents</button>
-  <button class="filter-btn" data-filter="5">Automatisation</button>
-  <button class="filter-btn" data-filter="6">Intégration</button>
-  <button class="filter-btn" data-filter="7">Orchestration</button>
-  <button class="filter-btn" data-filter="8">Analytics</button>
-  <button class="filter-btn" data-filter="9">Docs</button>
+  <button class="filter-btn" data-filter="5">Intégration</button>
+  <button class="filter-btn" data-filter="6">Tests</button>
+  <button class="filter-btn" data-filter="7">Rapport</button>
+  <button class="filter-btn" data-filter="8">Post-Soutenance</button>
   <button class="toggle-all" id="toggle-all-btn">▾ Tout réduire</button>
 </div>
 
@@ -181,7 +172,7 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 
   <div class="progress-wrap">
     <div class="progress-header">
-      <span class="progress-title">Progression du stage</span>
+      <span class="progress-title">Progression globale (calculée automatiquement depuis les statuts)</span>
       <span class="progress-pct" id="progress-pct-lbl">0%</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
@@ -194,13 +185,12 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
     <div class="legend-item"><div class="legend-bar" style="background:var(--c2)"></div>RAG</div>
     <div class="legend-item"><div class="legend-bar" style="background:var(--c3)"></div>NLP</div>
     <div class="legend-item"><div class="legend-bar" style="background:var(--c4)"></div>Agents</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c5)"></div>Automatisation</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c6)"></div>Intégration</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c7)"></div>Orchestration</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c8)"></div>Analytics</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c9)"></div>Docs</div>
+    <div class="legend-item"><div class="legend-bar" style="background:var(--c5)"></div>Intégration</div>
+    <div class="legend-item"><div class="legend-bar" style="background:var(--c6)"></div>Tests</div>
+    <div class="legend-item"><div class="legend-bar" style="background:var(--c7)"></div>Rapport</div>
+    <div class="legend-item"><div class="legend-bar" style="background:var(--c8)"></div>Post-Soutenance</div>
     <div class="legend-item"><div class="legend-diamond" style="background:var(--accent)"></div>Jalons</div>
-    <div class="legend-item"><div class="l-today"></div>Aujourd'hui</div>
+    <div class="legend-item"><div class="l-today" id="legend-today"></div>Aujourd'hui</div>
   </div>
 </div>
 
@@ -208,106 +198,171 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
   <div class="tip-title" id="tip-title"></div>
   <div class="tip-dates" id="tip-dates"></div>
   <div class="tip-desc"  id="tip-desc"></div>
+  <div class="tip-status" id="tip-status"></div>
 </div>
 
 <script>
-const PS=new Date(2026,1,9), PE=new Date(2026,7,9);
+// ========== DATES AUTOMATIQUES ==========
+const PS=new Date(2026,1,9), PE=new Date(2026,7,8); // Stage: 9 fév → 8 août
 const TD=(PE-PS)/86400000;
+const TODAY=new Date(); // ← Date du jour AUTOMATIQUE (système)
+const SOUTENANCE_DATE=new Date(2026,5,20); // 20 juin 2026
 
-const HEX=['#2c4a9e','#1864ab','#1578b8','#0d8a9a','#2b6cb0','#3d5a99','#1e40af','#1d6b52','#5046e5','#4a5568'];
+function d2d(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
+function dayOf(s){return(d2d(s)-PS)/86400000;}
+function pct(s){return Math.max(0,Math.min(100,dayOf(s)/TD*100));}
+function pctW(s,e){return Math.max(0,(dayOf(e)-dayOf(s))/TD*100);}
+function fmt(s){return d2d(s).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});}
+function fmtFull(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});}
+
+// ========== CALCUL AUTOMATIQUE DU POURCENTAGE ==========
+function calcAutoProgress(){
+  let totalWeight = 0, earnedWeight = 0;
+  
+  PHASES.forEach(phase=>{
+    phase.tasks.forEach(task=>{
+      const status = (task.status || '').trim();
+      totalWeight += 1; // chaque tâche = 1 point
+      
+      if(status.startsWith('✅')){
+        earnedWeight += 1; // 100%
+      }
+      else if(status.startsWith('🟡')){
+        // Extraire le % si présent : "🟡 45% - En cours" → 0.45
+        const match = status.match(/(\d+)%/);
+        earnedWeight += match ? parseInt(match[1])/100 : 0.5; // défaut 50%
+      }
+      // 🔴 ⏳ = 0%, rien à ajouter
+    });
+  });
+  
+  return totalWeight > 0 ? Math.round(earnedWeight / totalWeight * 100) : 0;
+}
+
+// ========== CALCUL AUTOMATIQUE JOURS RESTANTS ==========
+function calcDaysLeft(){
+  const diff=SOUTENANCE_DATE-TODAY;
+  return Math.ceil(diff/86400000);
+}
+
+// ========== MISE À JOUR STATS HEADER ==========
+function updateHeaderStats(){
+  const prog=calcAutoProgress();
+  const daysLeft=calcDaysLeft();
+  
+  document.getElementById('stat-progression').textContent=prog+'%';
+  document.getElementById('progress-pct-lbl').textContent=prog+'%';
+  document.getElementById('progress-fill').style.width=prog+'%';
+  
+  document.getElementById('stat-date').textContent=fmtFull(TODAY);
+  
+  if(daysLeft>0){
+    document.getElementById('stat-days').textContent=daysLeft+'j';
+  }else if(daysLeft===0){
+    document.getElementById('stat-days').textContent='Aujourd\'hui';
+  }else{
+    document.getElementById('stat-days').textContent='Terminé';
+  }
+  
+  // Légende aujourd'hui
+  const legendToday=document.getElementById('legend-today');
+  legendToday.parentElement.lastChild.textContent='Aujourd\'hui ('+fmtFull(TODAY)+')';
+  
+  // Sous-titre header
+  document.getElementById('header-subtitle').textContent=
+    fmtFull(PS)+' → '+fmtFull(PE)+' · '+fmtFull(TODAY)+' · '+
+    (daysLeft>0?daysLeft+'j avant soutenance':'Soutenance passée');
+}
+
+const HEX=['#2c4a9e','#1864ab','#1578b8','#0d8a9a','#2b6cb0','#1e40af','#1d6b52','#5046e5','#4a5568'];
 
 const PHASES=[
-  {label:"Cadrage & Analyse",          start:"2026-02-09",end:"2026-03-01",deps:[],
+  {label:"Cadrage & Analyse", start:"2026-02-09",end:"2026-03-01",deps:[],
    tasks:[
-    {label:"Analyse des besoins & contexte",          s:"2026-02-09",e:"2026-02-18",desc:"Recueil des besoins Maroclear, cadrage fonctionnel"},
-    {label:"Découverte environnement technique",       s:"2026-02-12",e:"2026-02-22",desc:"SI, outils, accès données GLPI"},
-    {label:"Formation marché financier",               s:"2026-02-09",e:"2026-02-20",desc:"Contexte réglementaire & organisationnel"},
-    {label:"Benchmark RAG / NLP existants",            s:"2026-02-18",e:"2026-02-28",desc:"LangChain, LlamaIndex, RAGatouille…"},
-    {label:"Définition architecture globale",          s:"2026-02-25",e:"2026-03-01",desc:"Schéma d'architecture cible validé"},
+    {label:"Analyse besoins & contexte Maroclear", s:"2026-02-09",e:"2026-02-18",desc:"Recueil besoins, audit processus support, cadrage fonctionnel",status:"✅ Terminé"},
+    {label:"Découverte environnement technique", s:"2026-02-12",e:"2026-02-22",desc:"SI, outils, accès GLPI, contraintes sécurité",status:"✅ Terminé"},
+    {label:"Formation marché financier & réglementaire", s:"2026-02-09",e:"2026-02-20",desc:"Contexte AMMC, loi 35-96, processus métier",status:"✅ Terminé"},
+    {label:"Benchmark RAG / NLP / LLMs", s:"2026-02-18",e:"2026-02-28",desc:"LangChain, ChromaDB, embeddings, prompt engineering",status:"✅ Terminé"},
+    {label:"Architecture globale validée", s:"2026-02-25",e:"2026-03-01",desc:"Schéma multi-agents, flux de données, stack technique",status:"✅ Terminé"},
   ]},
-  {label:"Data & Préparation",          start:"2026-02-20",end:"2026-03-15",deps:[0],
+  
+  {label:"Data & Préparation", start:"2026-02-20",end:"2026-03-15",deps:[0],
    tasks:[
-    {label:"Analyse tickets GLPI",                    s:"2026-02-20",e:"2026-02-28",desc:"Volumétrie, catégories, patterns incidents"},
-    {label:"Collecte & nettoyage données",             s:"2026-02-26",e:"2026-03-07",desc:"ETL, déduplication, anonymisation"},
-    {label:"Structuration des datasets",               s:"2026-03-05",e:"2026-03-12",desc:"Format JSON/CSV pour entraînement & RAG"},
-    {label:"Identification cas d'usage prioritaires",  s:"2026-03-10",e:"2026-03-15",desc:"Top 5 use-cases classés par valeur métier"},
+    {label:"Analyse tickets GLPI historiques", s:"2026-02-20",e:"2026-02-28",desc:"Volumétrie, catégories, patterns incidents récurrents",status:"✅ Terminé"},
+    {label:"Collecte & nettoyage données", s:"2026-02-26",e:"2026-03-07",desc:"ETL, déduplication, anonymisation, structuration",status:"✅ Terminé"},
+    {label:"Structuration datasets classification", s:"2026-03-05",e:"2026-03-12",desc:"Format JSON/CSV, labellisation initiale",status:"✅ Terminé"},
+    {label:"Identification use-cases prioritaires", s:"2026-03-10",e:"2026-03-15",desc:"Top 5 scénarios classés par valeur métier",status:"✅ Terminé"},
   ]},
-  {label:"RAG & Knowledge Base",        start:"2026-03-01",end:"2026-04-05",deps:[0,1],
+  
+  {label:"RAG & Knowledge Base", start:"2026-03-01",end:"2026-04-28",deps:[0,1],
    tasks:[
-    {label:"Création base de connaissance",            s:"2026-03-01",e:"2026-03-15",desc:"Ingestion docs réglementaires, procédures"},
-    {label:"Benchmark documents juridiques",           s:"2026-03-05",e:"2026-03-15",desc:"Évaluation pertinence des sources"},
-    {label:"Stratégies de chunking",                   s:"2026-03-12",e:"2026-03-22",desc:"Fixed, semantic, hierarchical chunking"},
-    {label:"Pipeline RAG initial",                     s:"2026-03-18",e:"2026-03-28",desc:"Embeddings + vector store + retriever"},
-    {label:"Tests récupération d'information",         s:"2026-03-25",e:"2026-04-05",desc:"Recall@K, MRR, NDCG"},
+    {label:" POC RAG Général (DO_RAP + Glossaire)", s:"2026-03-01",e:"2026-03-28",desc:"Pipeline fonctionnel: embeddings + ChromaDB + retriever + génération",status:"✅ POC fonctionnel"},
+    {label:" POC RAG Réglementaire (2 sources test)", s:"2026-03-10",e:"2026-04-12",desc:"Validation architecture RAG sur documents juridiques limités",status:"✅ POC validé"},
+    {label:" Chunking AMMC (857 pages) - en cours", s:"2026-04-01",e:"2026-04-22",desc:"Stratégie semantic chunking, overlap, metadata tagging",status:"🟡 45% - En cours"},
+    {label:" Indexation ChromaDB AMMC", s:"2026-04-18",e:"2026-04-26",desc:"Même pipeline que POC → scaling données",status:"⏳ En attente chunking"},
+    {label:" Tests qualité réponses RAG AMMC", s:"2026-04-24",e:"2026-04-28",desc:"Recall@K, pertinence métier, hallucinations",status:"⏳ À venir"},
   ]},
-  {label:"NLP & Classification",        start:"2026-03-20",end:"2026-04-20",deps:[1,2],
+  
+  {label:"NLP & Classification", start:"2026-03-20",end:"2026-05-10",deps:[1,2],
    tasks:[
-    {label:"Benchmark méthodes classification",        s:"2026-03-20",e:"2026-03-28",desc:"SVM, BERT, zero-shot, few-shot"},
-    {label:"Création dataset de classification",       s:"2026-03-26",e:"2026-04-05",desc:"Labellisation manuelle + augmentation"},
-    {label:"Développement modèle NLP",                 s:"2026-04-03",e:"2026-04-12",desc:"Fine-tuning ou prompting LLM"},
-    {label:"Prompt engineering (zero/few-shot)",       s:"2026-04-08",e:"2026-04-16",desc:"Rédaction & test des prompts systèmes"},
-    {label:"Évaluation des performances",              s:"2026-04-14",e:"2026-04-20",desc:"F1-score, accuracy, confusion matrix"},
+    {label:" Benchmark méthodes classification", s:"2026-03-20",e:"2026-03-28",desc:"SVM, Random Forest, Logistic Regression, zero-shot LLM",status:"✅ Terminé"},
+    {label:" Modèle Régression Logistique testé", s:"2026-03-26",e:"2026-04-08",desc:"Meilleur compromis précision/vitesse sur données initiales",status:"✅ POC validé"},
+    {label:" Prompt engineering (zero/few-shot)", s:"2026-04-05",e:"2026-04-20",desc:"Prompts explicatifs nuances métier: Incident/Demande/Réclamation",status:"🟡 50% - En cours"},
+    {label:" Classification avancée", s:"2026-04-15",e:"2026-05-05",desc:"Bloquant: besoin données plus significatifs pour fine-tuning",status:"🔴 Bloquant - En attente meeting"},
+    {label:" Évaluation performances finales", s:"2026-05-05",e:"2026-05-10",desc:"F1-score, matrice confusion, validation métier",status:"⏳ En attente données"},
   ]},
-  {label:"Développement Agents IA",     start:"2026-04-10",end:"2026-05-15",deps:[2,3],
+  
+  {label:"Développement Agents IA", start:"2026-04-15",end:"2026-05-18",deps:[2,3],
    tasks:[
-    {label:"Agent classification automatique",         s:"2026-04-10",e:"2026-04-22",desc:"Catégorisation & routage automatique"},
-    {label:"Agent réglementaire (RAG avancé)",         s:"2026-04-18",e:"2026-04-30",desc:"Réponses basées sur la base de connaissance"},
-    {label:"Agent suggestion / auto-remplissage",      s:"2026-04-25",e:"2026-05-08",desc:"Complétion intelligente des champs GLPI"},
-    {label:"Priorités des tickets",                    s:"2026-05-05",e:"2026-05-15",desc:"Scoring de priorité par criticité & SLA"},
+    {label:" Agent Classification (données réelles)", s:"2026-04-25",e:"2026-05-08",desc:"Fine-tuning modèle avec données GLPI enrichies",status:"⏳ En attente données"},
+    {label:" Calcul priorité P1-P4 + Email dispatcher", s:"2026-04-25",e:"2026-05-08",desc:"Algorithme scoring + notification automatique",status:"🔴 À développer"},
+    {label:" RAG Réglementaire AMMC complet", s:"2026-04-25",e:"2026-05-10",desc:"Intégration chunking + indexation + retriever optimisé",status:"⏳ Dépend chunking"},
+    {label:" RAG Affiliation (guide + upload docs)", s:"2026-05-01",e:"2026-05-15",desc:"Indexation processus affiliation, guide conversationnel",status:"🔴 En attente documents métier"},
+    {label:" Agent Orchestrateur (routing basique)", s:"2026-05-05",e:"2026-05-15",desc:"Détection intention → routage vers agent spécialisé",status:"🔴 Architecture définie, non codé"},
+    {label:" Guide mot de passe oublié (RAG Général+)", s:"2026-05-08",e:"2026-05-18",desc:"Module d'aide pas-à-pas: MFA, CGU, réinitialisation",status:"🔴 À développer"},
   ]},
-  {label:"Automatisation & RAG complet",start:"2026-05-01",end:"2026-06-01",deps:[4],
+  
+  {label:"Intégration & Interface", start:"2026-04-25",end:"2026-06-05",deps:[4],
    tasks:[
-    {label:"Système RAG complet",                      s:"2026-05-01",e:"2026-05-14",desc:"Pipeline end-to-end intégré"},
-    {label:"Automatisation remplissage champs",        s:"2026-05-10",e:"2026-05-22",desc:"Hooks GLPI + inférence IA"},
-    {label:"Génération automatique de réponses",       s:"2026-05-18",e:"2026-05-28",desc:"Suggestions de réponse pour opérateurs"},
-    {label:"Intégration workflows métiers",            s:"2026-05-24",e:"2026-06-01",desc:"Connexion aux processus ITSM existants"},
+    {label:" Simulation React complète (blueprint)", s:"2026-03-01",e:"2026-04-14",desc:"Interface + flux conversationnels + auto-fill page incidents",status:"✅ Terminé - Accélérateur intégration"},
+    {label:" Auto-fill: pages demande/réclamation", s:"2026-05-01",e:"2026-05-18",desc:"Extension logique à toutes pages (attente screenshots)",status:"🔴 En attente maquettes pages"},
+    {label:" Widget flottant: intégration portail public + MyMaroclear", s:"2026-05-08",e:"2026-05-25",desc:"Composant injectable, gestion état connexion",status:"🔴 À développer"},
   ]},
-  {label:"Intégration & Interface",     start:"2026-05-20",end:"2026-06-20",deps:[4,5],
+  
+  {label:"Tests & Optimisation", start:"2026-05-25",end:"2026-06-15",deps:[5],
    tasks:[
-    {label:"Simulation interface Figma",               s:"2026-05-20",e:"2026-05-30",desc:"Wireframes + prototype haute fidélité"},
-    {label:"Développement widget chat",                s:"2026-05-28",e:"2026-06-08",desc:"Composant React / Web Component"},
-    {label:"Intégration dans le portail",              s:"2026-06-05",e:"2026-06-15",desc:"Injection dans le portail Maroclear"},
-    {label:"Tests utilisateurs (UAT)",                 s:"2026-06-12",e:"2026-06-20",desc:"Tests en environnement de recette"},
+    {label:" Tests utilisateurs (scénarios complets)", s:"2026-05-25",e:"2026-06-05",desc:"Validation parcours: visiteur, affilié, dispatcher",status:"⏳ Dépend intégration"},
+    {label:" Optimisation performances RAG", s:"2026-06-01",e:"2026-06-10",desc:"Latence, cache sémantique, batching requêtes",status:"⏳ À venir"},
+    {label:" Base connaissance N1 (FAQs)", s:"2026-06-05",e:"2026-06-12",desc:"Documentation questions fréquentes + réponses validées",status:"⏳ En attente validation métier"},
+    {label:" Ajustements post-tests", s:"2026-06-10",e:"2026-06-15",desc:"Corrections bugs, amélioration UX, fine-tuning",status:"⏳ À venir"},
   ]},
-  {label:"Orchestration Multi-agents",  start:"2026-06-15",end:"2026-07-10",deps:[5,6],
+  
+  {label:" Rapport PFE - Présentation de soutenance", start:"2026-04-15",end:"2026-07-10",deps:[],
    tasks:[
-    {label:"Orchestration des agents IA",              s:"2026-06-15",e:"2026-06-25",desc:"LangGraph / AutoGen / orchestrateur custom"},
-    {label:"Coordination RAG + NLP + UI",              s:"2026-06-22",e:"2026-07-02",desc:"Intégration des modules entre eux"},
-    {label:"Optimisation des performances",            s:"2026-06-28",e:"2026-07-10",desc:"Latence, cache sémantique, profiling"},
+    {label:" Rapport FINALISÉ ", s:"2026-04-15",e:"2026-05-31",desc:"Version finale validée par encadrant",status:"⏳ Jalon critique",milestone:true},
+    {label:" Présentation de soutenance ", s:"2026-05-10",e:"2026-07-10",desc:"Version finale validée par encadrant",status:"⏳ Jalon critique",milestone:true},
   ]},
-  {label:"Analytics & Dashboard",       start:"2026-07-01",end:"2026-07-25",deps:[7],
+  
+  {label:" Post-Soutenance - Intégration Prod", start:"2026-07-11",end:"2026-08-08",deps:[6,7],
    tasks:[
-    {label:"Mise en place des indicateurs",            s:"2026-07-01",e:"2026-07-10",desc:"KPIs : taux résolution, satisfaction, latence"},
-    {label:"Dashboard de suivi",                       s:"2026-07-08",e:"2026-07-18",desc:"Tableau de bord opérationnel & IA"},
-    {label:"Analyse performances IA",                  s:"2026-07-14",e:"2026-07-25",desc:"Drift, qualité réponses, retours utilisateurs"},
-  ]},
-  {label:"Documentation & Soutenance",  start:"2026-07-20",end:"2026-08-09",deps:[8],
-   tasks:[
-    {label:"Documentation technique",                  s:"2026-07-20",e:"2026-07-28",desc:"Architecture, API, guides de déploiement"},
-    {label:"Rapport de stage",                         s:"2026-07-25",e:"2026-08-03",desc:"Rédaction du mémoire complet"},
-    {label:"Support de soutenance",                    s:"2026-07-30",e:"2026-08-06",desc:"Présentation PowerPoint finale"},
-    {label:"Préparation & répétitions",                s:"2026-08-05",e:"2026-08-09",desc:"Simulations de soutenance & Q/A"},
+    {label:" Déploiement environnement production", s:"2026-07-11",e:"2026-07-25",desc:"Migration depuis environnement test, configuration sécurité",status:"⏳ Post-soutenance"},
+    {label:" Tests réels utilisateurs (affiliés)", s:"2026-07-25",e:"2026-08-05",desc:"Collecte feedback, mesure satisfaction, détection bugs prod",status:"⏳ Post-soutenance"},
+    {label:" Documentation complète (utilisateurs + admin)", s:"2026-05-10",e:"2026-07-31",desc:"Guides d'utilisation, procédures maintenance, FAQ technique",status:"⏳ Post-soutenance"},
+    {label:" Maintenance & améliorations continues", s:"2026-07-20",e:"2026-08-08",desc:"Corrections bugs, optimisations, features additionnelles si temps",status:"⏳ Post-soutenance"},
+    {label:" Handover & transfert de compétences", s:"2026-08-01",e:"2026-08-08",desc:"Formation équipe Maroclear, documentation transfert, clôture stage",status:"⏳ Fin de stage"},
   ]},
 ];
 
 const MILESTONES=[
-  {label:"Fin analyse",          date:"2026-03-01",color:"#2c4a9e",desc:"Cadrage & architecture validés"},
-  {label:"Prototype RAG",        date:"2026-04-05",color:"#1578b8",desc:"Pipeline RAG fonctionnel & testé"},
-  {label:"Version bêta",         date:"2026-05-20",color:"#2b6cb0",desc:"Agents IA intégrés, démo interne"},
-  {label:"Intégration complète", date:"2026-06-20",color:"#1e40af",desc:"Widget live dans le portail Maroclear"},
-  {label:"Soutenance finale",    date:"2026-08-09",color:"#1d6b52",desc:"Présentation & remise du rapport"},
+  {label:"Architecture validée", date:"2026-03-01",color:"#2c4a9e",desc:"Cadrage & stack technique approuvés"},
+  {label:"POCs RAG + Classification", date:"2026-04-12",color:"#1578b8",desc:"Pipeline RAG & modèle classification testés"},
+  {label:"Intégration test terminée", date:"2026-06-05",color:"#1e40af",desc:"Système déployé sur environnement test"},
+  {label:" SOUTENANCE", date:"2026-06-20",color:"#1d6b52",desc:"Présentation finale + démo live + rapport"},
+  {label:" Stage terminé", date:"2026-08-08",color:"#4a5568",desc:"Livraison production + documentation + handover"},
 ];
 
-// Flatten deps into pairs
 const DEPS=[];
 
-function d2d(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
-function dayOf(s){return(d2d(s)-PS)/86400000;}
-function pct(s){return dayOf(s)/TD*100;}
-function pctW(s,e){return(dayOf(e)-dayOf(s))/TD*100;}
-function fmt(s){return d2d(s).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});}
-
-// Months header
 const MONTHS=[{l:"Fév",y:2026,m:1},{l:"Mars",y:2026,m:2},{l:"Avr",y:2026,m:3},
               {l:"Mai",y:2026,m:4},{l:"Juin",y:2026,m:5},{l:"Juil",y:2026,m:6},{l:"Août",y:2026,m:7}];
 const mhEl=document.getElementById('months-header');
@@ -328,23 +383,19 @@ function gridOv(){
 }
 
 function addTodayLine(el){
-  const now=new Date();
-  if(now<PS||now>PE)return;
-  const p=(now-PS)/(PE-PS)*100;
+  const p=(TODAY-PS)/(PE-PS)*100;
   const ln=document.createElement('div');ln.className='today-line';ln.style.left=p+'%';
   const dot=document.createElement('div');dot.className='today-dot';
   ln.appendChild(dot);el.appendChild(ln);
 }
 
-// Tooltip
 const tip=document.getElementById('tooltip');
-function tipify(el,title,dates,desc,color){
+function tipify(el,title,dates,desc,status,color){
   el.addEventListener('mouseenter',e=>{
-    document.getElementById('tip-title').innerHTML=
-      (color?`<span class="tip-dot" style="background:${color}"></span>`:'')
-      +title;
+    document.getElementById('tip-title').innerHTML=(color?`<span class="tip-dot" style="background:${color}"></span>`:'')+title;
     document.getElementById('tip-dates').textContent=dates;
     document.getElementById('tip-desc').textContent=desc||'';
+    document.getElementById('tip-status').textContent=status||'';
     tip.style.display='block';mv(e);
   });
   el.addEventListener('mousemove',mv);
@@ -352,14 +403,14 @@ function tipify(el,title,dates,desc,color){
 }
 function mv(e){
   const x=e.clientX+16,y=e.clientY-8;
-  tip.style.left=Math.min(x,window.innerWidth-268)+'px';
+  tip.style.left=Math.min(x,window.innerWidth-298)+'px';
   tip.style.top=Math.max(8,y-tip.offsetHeight/2)+'px';
 }
 
 const gbody=document.getElementById('gantt-body');
 let allOpen=true;
 const openSet=new Set(PHASES.map((_,i)=>i));
-const phaseInfo=[];  // {lPct, wPct, rowEl, bcEl}
+const phaseInfo=[];
 let arrowSvg=null;
 
 function renderAll(){
@@ -371,7 +422,6 @@ function renderAll(){
     group.className='phase-group'+(openSet.has(i)?' open':'');
     group.dataset.phase=String(i);
 
-    // Phase row
     const row=document.createElement('div');row.className='phase-row';
     const lbl=document.createElement('div');lbl.className='phase-label';
     lbl.innerHTML=`
@@ -389,7 +439,7 @@ function renderAll(){
     const bar=document.createElement('div');bar.className='phase-bar';
     bar.style.cssText=`left:${lP}%;width:${wP}%;background:${HEX[i]}`;
     bar.textContent=`${fmt(phase.start)} → ${fmt(phase.end)}`;
-    tipify(bar,phase.label,`${fmt(phase.start)} → ${fmt(phase.end)}`,`${phase.tasks.length} tâches · cliquer pour détailler`,HEX[i]);
+    tipify(bar,phase.label,`${fmt(phase.start)} → ${fmt(phase.end)}`,`${phase.tasks.length} tâches · cliquer pour détailler`,"",HEX[i]);
     bc.appendChild(bar);
 
     phaseInfo.push({lP,wP,rowEl:row,bcEl:bc,barEl:bar,i});
@@ -401,7 +451,6 @@ function renderAll(){
       setTimeout(drawArrows,50);
     });
 
-    // Task rows
     const tw=document.createElement('div');tw.className='tasks-wrap';
     phase.tasks.forEach((task,ti)=>{
       const tr=document.createElement('div');tr.className='task-row';
@@ -416,7 +465,7 @@ function renderAll(){
       tbc.appendChild(gridOv());
       const tb=document.createElement('div');tb.className='task-bar';
       tb.style.cssText=`left:${pct(task.s)}%;width:${pctW(task.s,task.e)}%;background:${HEX[i]}`;
-      tipify(tb,task.label,`${fmt(task.s)} → ${fmt(task.e)}`,task.desc,HEX[i]);
+      tipify(tb,task.label,`${fmt(task.s)} → ${fmt(task.e)}`,task.desc,task.status||"",HEX[i]);
       tbc.appendChild(tb);
 
       tr.appendChild(tlc);tr.appendChild(tbc);
@@ -427,7 +476,6 @@ function renderAll(){
     gbody.appendChild(group);
   });
 
-  // Milestones row
   const msS=document.createElement('div');msS.className='milestones-section';
   const msR=document.createElement('div');msR.className='ms-row';
   const msL=document.createElement('div');msL.className='ms-label-col';
@@ -440,7 +488,7 @@ function renderAll(){
     const p=pct(ms.date);
     const mk=document.createElement('div');mk.className='milestone';
     mk.style.cssText=`left:${p}%;background:${ms.color}`;
-    tipify(mk,'◆ '+ms.label,fmt(ms.date),ms.desc,ms.color);
+    tipify(mk,'◆ '+ms.label,fmt(ms.date),ms.desc,"",ms.color);
     const vl=document.createElement('div');vl.className='ms-vline';
     vl.style.cssText=`left:${p}%;background:${ms.color}`;
     const cap=document.createElement('div');cap.className='ms-caption';
@@ -454,17 +502,13 @@ function renderAll(){
   setTimeout(drawArrows,80);
 }
 
-/* ── draw dependency arrows ── */
 function drawArrows(){
   if(arrowSvg)arrowSvg.remove();
   if(!DEPS.length)return;
-
   const bodyRect=gbody.getBoundingClientRect();
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
   svg.setAttribute('class','dep-svg');
   svg.style.cssText=`width:100%;height:${gbody.offsetHeight}px;position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:6`;
-
-  // Arrowhead marker
   const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
   const mk=document.createElementNS('http://www.w3.org/2000/svg','marker');
   mk.setAttribute('id','dep-arrow');mk.setAttribute('viewBox','0 0 10 10');
@@ -476,33 +520,23 @@ function drawArrows(){
   mp.setAttribute('stroke','#3451b2');mp.setAttribute('stroke-width','1.4');
   mp.setAttribute('stroke-linecap','round');mp.setAttribute('stroke-linejoin','round');
   mk.appendChild(mp);defs.appendChild(mk);svg.appendChild(defs);
-
   DEPS.forEach(([from,to])=>{
     const fi=phaseInfo[from], ti2=phaseInfo[to];
     if(!fi||!ti2)return;
-
     const fGroup=gbody.querySelector(`.phase-group[data-phase="${from}"]`);
     const tGroup=gbody.querySelector(`.phase-group[data-phase="${to}"]`);
     if(!fGroup||!tGroup)return;
     if(fGroup.classList.contains('hidden')||tGroup.classList.contains('hidden'))return;
-
     const fRowR=fi.rowEl.getBoundingClientRect();
     const tRowR=ti2.rowEl.getBoundingClientRect();
     const fBcR=fi.bcEl.getBoundingClientRect();
     const tBcR=ti2.bcEl.getBoundingClientRect();
-
-    // x1 = right edge of from-phase bar (absolute)
     const x1abs=fBcR.left+(fi.lP+fi.wP)/100*fBcR.width;
-    // x2 = left edge of to-phase bar (absolute)
     const x2abs=tBcR.left+ti2.lP/100*tBcR.width;
-
     const bLeft=bodyRect.left;
     const bTop=bodyRect.top;
-
     const x1=x1abs-bLeft, y1=fRowR.top+fRowR.height/2-bTop;
     const x2=x2abs-bLeft, y2=tRowR.top+tRowR.height/2-bTop;
-
-    // Smooth cubic bezier
     const cx=(x1+x2)/2;
     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('d',`M${x1},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}`);
@@ -514,12 +548,10 @@ function drawArrows(){
     path.setAttribute('marker-end','url(#dep-arrow)');
     svg.appendChild(path);
   });
-
   gbody.appendChild(svg);
   arrowSvg=svg;
 }
 
-/* ── filters ── */
 document.querySelectorAll('.filter-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -532,7 +564,6 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
   });
 });
 
-/* ── toggle all ── */
 document.getElementById('toggle-all-btn').addEventListener('click',function(){
   allOpen=!allOpen;
   PHASES.forEach((_,i)=>allOpen?openSet.add(i):openSet.delete(i));
@@ -543,12 +574,13 @@ document.getElementById('toggle-all-btn').addEventListener('click',function(){
   setTimeout(drawArrows,380);
 });
 
-/* ── progress ── */
-const now=new Date();
-const prog=now<=PS?0:now>=PE?100:Math.round((now-PS)/(PE-PS)*100);
-document.getElementById('progress-fill').style.width=prog+'%';
-document.getElementById('progress-pct-lbl').textContent=prog+'%';
-document.getElementById('stat-progress').textContent=prog+'%';
+// ========== MISE À JOUR AUTOMATIQUE ==========
+updateHeaderStats();
+
+// --- CALCUL TEMPS ÉCOULÉ ---
+const elapsedPct = Math.round(((TODAY - PS) / (PE - PS)) * 100);
+document.getElementById('stat-elapsed').textContent = Math.max(0, Math.min(100, elapsedPct)) + '%';
+// ---------------------------
 
 window.addEventListener('resize',()=>setTimeout(drawArrows,50));
 renderAll();
