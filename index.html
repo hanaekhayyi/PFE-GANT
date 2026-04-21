@@ -43,7 +43,7 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .toggle-all:hover{color:var(--text);background:var(--bg3)}
 .gantt-table{display:flex;flex-direction:column;overflow-x:auto}
 .gantt-header-row{display:flex;align-items:stretch;border-bottom:1.5px solid var(--border2);position:sticky;top:0;z-index:20;background:var(--bg2)}
-.label-col{width:296px;min-width:296px;flex-shrink:0;padding:11px 16px 11px 48px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;border-right:1px solid var(--border2)}
+.label-col{width:320px;min-width:320px;flex-shrink:0;padding:11px 16px 11px 48px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;border-right:1px solid var(--border2)}
 .timeline-col{flex:1;min-width:0;position:relative;display:flex}
 .month-cell{flex:1;padding:11px 0 8px;font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center;border-right:1px solid var(--border);position:relative}
 .month-cell:last-child{border-right:none}
@@ -53,7 +53,7 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .phase-group.hidden{display:none}
 .phase-row{display:flex;align-items:stretch;cursor:pointer;min-height:48px;transition:background .15s}
 .phase-row:hover{background:rgba(52,81,178,.025)}
-.phase-label{width:296px;min-width:296px;flex-shrink:0;padding:0 14px 0 48px;display:flex;align-items:center;gap:9px;border-right:1px solid var(--border)}
+.phase-label{width:320px;min-width:320px;flex-shrink:0;padding:0 14px 0 48px;display:flex;align-items:center;gap:9px;border-right:1px solid var(--border)}
 .phase-accent-bar{width:3px;height:26px;border-radius:2px;flex-shrink:0}
 .phase-index{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);width:14px;flex-shrink:0}
 .phase-name{font-size:11.5px;font-weight:700;letter-spacing:-.01em;flex:1;line-height:1.3}
@@ -70,10 +70,10 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .today-dot{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:#c81e32;border:2px solid var(--bg2)}
 .dep-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:6}
 .tasks-wrap{overflow:hidden;max-height:0;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
-.phase-group.open .tasks-wrap{max-height:900px}
+.phase-group.open .tasks-wrap{max-height:1200px}
 .task-row{display:flex;align-items:center;min-height:34px;border-top:1px solid rgba(30,50,120,.04);transition:background .1s}
 .task-row:hover{background:rgba(52,81,178,.022)}
-.task-label-col{width:296px;min-width:296px;flex-shrink:0;padding:0 14px 0 64px;font-size:11px;color:var(--muted2);line-height:1.35;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.task-label-col{width:320px;min-width:320px;flex-shrink:0;padding:0 14px 0 64px;font-size:11px;color:var(--muted2);line-height:1.35;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .task-num{width:17px;height:17px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:8px;font-weight:600;color:#fff;line-height:1}
 .task-name{flex:1}
 .task-bar-col{flex:1;min-width:0;position:relative;height:34px}
@@ -82,20 +82,18 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .task-bar::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;background:rgba(255,255,255,.45)}
 .milestones-section{border-bottom:1px solid var(--border)}
 .ms-row{display:flex;align-items:stretch;min-height:60px}
-.ms-label-col{width:296px;min-width:296px;flex-shrink:0;padding:0 14px 0 48px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted2)}
+.ms-label-col{width:320px;min-width:320px;flex-shrink:0;padding:0 14px 0 48px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted2)}
 .ms-bar-col{flex:1;min-width:0;position:relative}
 .milestone{position:absolute;top:50%;transform:translate(-50%,-50%) rotate(45deg);width:13px;height:13px;border-radius:2px;cursor:pointer;transition:transform .2s;z-index:5;border:2px solid #fff}
 .milestone:hover{transform:translate(-50%,-50%) rotate(45deg) scale(1.5)}
 .ms-vline{position:absolute;top:6px;bottom:6px;width:1px;opacity:.18}
 .ms-caption{position:absolute;top:calc(50% + 14px);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.05em;transform:translateX(-50%);white-space:nowrap;font-weight:600}
-#tooltip{position:fixed;z-index:9999;pointer-events:none;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px 16px;max-width:280px;display:none;box-shadow:0 8px 28px rgba(30,50,120,.12),0 2px 6px rgba(30,50,120,.06)}
+#tooltip{position:fixed;z-index:9999;pointer-events:none;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px 16px;max-width:320px;display:none;box-shadow:0 8px 28px rgba(30,50,120,.12),0 2px 6px rgba(30,50,120,.06)}
 .tip-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .tip-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
 .tip-dates{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:5px;letter-spacing:.04em}
 .tip-desc{font-size:11px;color:var(--muted2);line-height:1.55}
 .tip-status{font-size:10px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);color:var(--muted)}
-.legend-section{padding:18px 48px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-top:1px solid var(--border);background:var(--bg2)}
-.legend-title{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-right:4px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted2)}
 .legend-bar{width:16px;height:5px;border-radius:2px}
 .legend-diamond{width:9px;height:9px;transform:rotate(45deg);border-radius:1px;border:1.5px solid #fff}
@@ -111,6 +109,8 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 .main{display:flex;flex-direction:column;padding-bottom:60px}
 .auto-badge{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:9px;color:#10b981;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:2px 8px;border-radius:4px;margin-left:6px;letter-spacing:.06em}
 .auto-badge::before{content:'⚡'}
+.agent-badge{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:9px;color:#7c3aed;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);padding:2px 8px;border-radius:4px;margin-left:6px;letter-spacing:.06em}
+.agent-badge::before{content:''}
 </style>
 </head>
 <body>
@@ -118,6 +118,7 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 <header>
   <div class="header-left">
     <div class="badge">PFE Data Science · Maroclear</div>
+    <h1>Agent Conversationnel IA Multi-Agents</h1>
     <p class="subtitle" id="header-subtitle"></p>
   </div>
   <div class="header-stats">
@@ -130,6 +131,10 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
       <div class="stat-lbl">Jours avant Soutenance</div>
     </div>
     <div class="stat">
+      <div class="stat-val" id="stat-days-stage">—</div>
+      <div class="stat-lbl">Jours avant Fin de Stage</div>
+    </div>
+    <div class="stat">
       <div class="stat-val" id="stat-date">—</div>
       <div class="stat-lbl">Date du jour</div>
     </div>
@@ -140,24 +145,22 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
   </div>
 </header>
 
-<div class="poc-badge">
-   <strong>Stratégie "POC First" :</strong> Simulation React + POCs RAG/Classification validés = 
-  <strong>intégration accélérée</strong>. Stack technique testée (ChromaDB, embeddings, LLMs), 
-  architecture validée, logique métier codée → le reste = scaling + intégration.
-</div>
+
 
 <div class="controls">
   <span class="ctrl-label">Filtrer :</span>
   <button class="filter-btn active" data-filter="all">Tout</button>
   <button class="filter-btn" data-filter="0">Cadrage</button>
   <button class="filter-btn" data-filter="1">Data</button>
-  <button class="filter-btn" data-filter="2">RAG</button>
-  <button class="filter-btn" data-filter="3">NLP</button>
-  <button class="filter-btn" data-filter="4">Agents</button>
-  <button class="filter-btn" data-filter="5">Intégration</button>
-  <button class="filter-btn" data-filter="6">Tests</button>
-  <button class="filter-btn" data-filter="7">Rapport</button>
-  <button class="filter-btn" data-filter="8">Post-Soutenance</button>
+  <button class="filter-btn" data-filter="2">Assistant Informationnel & Procédural</button>
+  <button class="filter-btn" data-filter="3">Conseiller Réglementaire</button>
+  <button class="filter-btn" data-filter="4">Support & Classification</button>
+  <button class="filter-btn" data-filter="5">Auto-Dispatcher</button>
+  <button class="filter-btn" data-filter="6">Orchestrateur</button>
+  <button class="filter-btn" data-filter="7">Intégration</button>
+  <button class="filter-btn" data-filter="8">Tests</button>
+  <button class="filter-btn" data-filter="9">Rapport</button>
+  <button class="filter-btn" data-filter="10">Post-Soutenance</button>
   <button class="toggle-all" id="toggle-all-btn">▾ Tout réduire</button>
 </div>
 
@@ -179,17 +182,8 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
   </div>
 
   <div class="legend-section">
-    <span class="legend-title">Légende</span>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c0)"></div>Cadrage</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c1)"></div>Data</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c2)"></div>RAG</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c3)"></div>NLP</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c4)"></div>Agents</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c5)"></div>Intégration</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c6)"></div>Tests</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c7)"></div>Rapport</div>
-    <div class="legend-item"><div class="legend-bar" style="background:var(--c8)"></div>Post-Soutenance</div>
-    <div class="legend-item"><div class="legend-diamond" style="background:var(--accent)"></div>Jalons</div>
+    <span class="legend-title"></span>
+  
     <div class="legend-item"><div class="l-today" id="legend-today"></div>Aujourd'hui</div>
   </div>
 </div>
@@ -203,10 +197,11 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 
 <script>
 // ========== DATES AUTOMATIQUES ==========
-const PS=new Date(2026,1,9), PE=new Date(2026,7,8); // Stage: 9 fév → 8 août
+const PS=new Date(2026,1,9), PE=new Date(2026,7,9); // Stage: 9 fév → 9 août
 const TD=(PE-PS)/86400000;
 const TODAY=new Date(); // ← Date du jour AUTOMATIQUE (système)
 const SOUTENANCE_DATE=new Date(2026,5,20); // 20 juin 2026
+const STAGE_END_DATE=new Date(2026,7,9); // 9 août 2026
 
 function d2d(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
 function dayOf(s){return(d2d(s)-PS)/86400000;}
@@ -219,20 +214,29 @@ function fmtFull(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'sh
 function calcAutoProgress(){
   let totalWeight = 0, earnedWeight = 0;
   
-  PHASES.forEach(phase=>{
-    phase.tasks.forEach(task=>{
+  PHASES.forEach(phase => {
+    phase.tasks.forEach(task => {
+      // 1. Calculer la durée de la tâche en jours
+      const startDate = d2d(task.s);
+      const endDate = d2d(task.e);
+      // On ajoute +1 pour inclure le jour de fin dans le calcul
+      const duration = Math.max(1, (endDate - startDate) / 86400000 + 1); 
+      
+      // 2. Déterminer le facteur d'avancement (0 à 1)
       const status = (task.status || '').trim();
-      totalWeight += 1; // chaque tâche = 1 point
+      let completionFactor = 0;
       
       if(status.startsWith('✅')){
-        earnedWeight += 1; // 100%
+        completionFactor = 1; // 100%
       }
       else if(status.startsWith('🟡')){
-        // Extraire le % si présent : "🟡 45% - En cours" → 0.45
         const match = status.match(/(\d+)%/);
-        earnedWeight += match ? parseInt(match[1])/100 : 0.5; // défaut 50%
+        completionFactor = match ? parseInt(match[1])/100 : 0.5; // % spécifié ou 50%
       }
-      // 🔴 ⏳ = 0%, rien à ajouter
+
+      // 3. Pondération : Multiplier la durée par l'avancement
+      totalWeight += duration;
+      earnedWeight += (duration * completionFactor);
     });
   });
   
@@ -245,10 +249,16 @@ function calcDaysLeft(){
   return Math.ceil(diff/86400000);
 }
 
+function calcDaysLeftStage(){
+  const diff=STAGE_END_DATE-TODAY;
+  return Math.ceil(diff/86400000);
+}
+
 // ========== MISE À JOUR STATS HEADER ==========
 function updateHeaderStats(){
   const prog=calcAutoProgress();
   const daysLeft=calcDaysLeft();
+  const daysLeftStage=calcDaysLeftStage();
   
   document.getElementById('stat-progression').textContent=prog+'%';
   document.getElementById('progress-pct-lbl').textContent=prog+'%';
@@ -256,12 +266,22 @@ function updateHeaderStats(){
   
   document.getElementById('stat-date').textContent=fmtFull(TODAY);
   
+  // Jours avant soutenance
   if(daysLeft>0){
     document.getElementById('stat-days').textContent=daysLeft+'j';
   }else if(daysLeft===0){
     document.getElementById('stat-days').textContent='Aujourd\'hui';
   }else{
     document.getElementById('stat-days').textContent='Terminé';
+  }
+  
+  // Jours avant fin de stage
+  if(daysLeftStage>0){
+    document.getElementById('stat-days-stage').textContent=daysLeftStage+'j';
+  }else if(daysLeftStage===0){
+    document.getElementById('stat-days-stage').textContent='Aujourd\'hui';
+  }else{
+    document.getElementById('stat-days-stage').textContent='Terminé';
   }
   
   // Légende aujourd'hui
@@ -271,94 +291,115 @@ function updateHeaderStats(){
   // Sous-titre header
   document.getElementById('header-subtitle').textContent=
     fmtFull(PS)+' → '+fmtFull(PE)+' · '+fmtFull(TODAY)+' · '+
-    (daysLeft>0?daysLeft+'j avant soutenance':'Soutenance passée');
+    (daysLeft>0?daysLeft+'j avant soutenance':'Soutenance passée')+' · '+
+    (daysLeftStage>0?daysLeftStage+'j avant fin stage':'Stage terminé');
+  
+  // Temps écoulé
+  const elapsedPct = Math.round(((TODAY - PS) / (PE - PS)) * 100);
+  document.getElementById('stat-elapsed').textContent = Math.max(0, Math.min(100, elapsedPct)) + '%';
 }
 
-const HEX=['#2c4a9e','#1864ab','#1578b8','#0d8a9a','#2b6cb0','#1e40af','#1d6b52','#4a6fa5','#4a5568'];
+const HEX=['#2c4a9e','#1864ab','#1578b18','#0d8a9a','#2b6cb0','#3d5a99','#1e40af','#1d6b52','#4a6fa5','#4a5568','#6b7280'];
 
 const PHASES=[
-  {label:"Cadrage & Analyse", start:"2026-02-09",end:"2026-03-01",deps:[],
+  {label:"Phase 1 : Cadrage & Conception Globale", start:"2026-02-09",end:"2026-03-15",deps:[],
    tasks:[
-    {label:"Analyse besoins & contexte Maroclear", s:"2026-02-09",e:"2026-02-18",desc:"Recueil besoins, audit processus support, cadrage fonctionnel",status:"✅ Terminé"},
-    {label:"Découverte environnement technique", s:"2026-02-12",e:"2026-02-22",desc:"SI, outils, accès GLPI, contraintes sécurité",status:"✅ Terminé"},
-    {label:"Formation marché financier & réglementaire", s:"2026-02-09",e:"2026-02-20",desc:"Contexte AMMC, loi 35-96, processus métier",status:"✅ Terminé"},
-    {label:"Benchmark RAG / NLP / LLMs", s:"2026-02-18",e:"2026-02-28",desc:"LangChain, ChromaDB, embeddings, prompt engineering",status:"✅ Terminé"},
-    {label:"Architecture globale validée", s:"2026-02-25",e:"2026-03-01",desc:"Schéma multi-agents, flux de données, stack technique",status:"✅ Terminé"},
+    {label:"Découverte environnement Maroclear et du projet", s:"2026-02-09",e:"2026-02-16",desc:"Recueil besoins, audit processus support, cadrage fonctionnel",status:"✅ Terminé"},
+    {label:"Formation marché financier & réglementaire", s:"2026-02-16",e:"2026-02-17",desc:"Contexte AMMC, loi 35-96, processus métier",status:"✅ Terminé"},
+    {label:"Définition périmètre & objectifs", s:"2026-02-18",e:"2026-02-28",desc:"Scénarios conversationnels prioritaires, cas d'usage, KPIs",status:"✅ Terminé"},
+    {label:"Benchmark RAG / NLP / LLMs", s:"2026-02-25",e:"2026-03-05",desc:"LangChain, ChromaDB, embeddings, prompt engineering",status:"✅ Terminé"},
+    {label:"Architecture multi-agents validée", s:"2026-03-01",e:"2026-03-15",desc:"Schéma 5 agents, flux de données, stack technique, interactions",status:"✅ Terminé"},
   ]},
   
-  {label:"Data & Préparation", start:"2026-02-20",end:"2026-03-15",deps:[0],
+  {label:"Phase 2 : Data & Préparation", start:"2026-02-20",end:"2026-03-20",deps:[0],
    tasks:[
     {label:"Analyse tickets GLPI historiques", s:"2026-02-20",e:"2026-02-28",desc:"Volumétrie, catégories, patterns incidents récurrents",status:"✅ Terminé"},
-    {label:"Collecte & nettoyage données", s:"2026-02-26",e:"2026-03-07",desc:"ETL, déduplication, anonymisation, structuration",status:"✅ Terminé"},
-    {label:"Structuration datasets classification", s:"2026-03-05",e:"2026-03-12",desc:"Format JSON/CSV, labellisation initiale",status:"✅ Terminé"},
-    {label:"Identification use-cases prioritaires", s:"2026-03-10",e:"2026-03-15",desc:"Top 5 scénarios classés par valeur métier",status:"✅ Terminé"},
+    {label:"Collecte & nettoyage données", s:"2026-02-26",e:"2026-03-07",desc:"déduplication, filtrage, structuration",status:"✅ Terminé"},
+    {label:"Structuration datasets classification", s:"2026-03-05",e:"2026-03-15",desc:"Format JSON/CSV, labellisation initiale",status:"✅ Terminé"},
+    {label:"Collecte documents réglementaires", s:"2026-03-10",e:"2026-03-20",desc:"Dahirs, Règlement Général, recueil AMMC",status:"✅ Terminé"},
   ]},
   
-  {label:"RAG & Knowledge Base", start:"2026-03-01",end:"2026-04-28",deps:[0,1],
+  {label:" Agent 1 : Assistant Informationnel & Procédural", start:"2026-03-15",end:"2026-05-10",deps:[0,1],
    tasks:[
-    {label:" POC RAG Général (DO_RAP + Glossaire)", s:"2026-03-01",e:"2026-03-28",desc:"Pipeline fonctionnel: embeddings + ChromaDB + retriever + génération",status:"✅ POC fonctionnel"},
-    {label:" POC RAG Réglementaire (2 sources test)", s:"2026-03-10",e:"2026-04-12",desc:"Validation architecture RAG sur documents juridiques limités",status:"✅ POC validé"},
-    {label:" Chunking AMMC (857 pages) - en cours", s:"2026-04-01",e:"2026-04-22",desc:"Stratégie semantic chunking, overlap, metadata tagging",status:"🟡 45% - En cours"},
-    {label:" Indexation ChromaDB AMMC", s:"2026-04-18",e:"2026-04-26",desc:"Même pipeline que POC → scaling données",status:"⏳ En attente chunking"},
-    {label:" Tests qualité réponses RAG AMMC", s:"2026-04-24",e:"2026-04-28",desc:"Recall@K, pertinence métier, hallucinations",status:"⏳ À venir"},
+    {label:"POC RAG connaissance Maroclear", s:"2026-03-15",e:"2026-03-28",desc:"Glossaire, missions, services - Pipeline embeddings + ChromaDB",status:"✅ POC fonctionnel"},
+    {label:"Guide affiliation conversationnel", s:"2026-03-25",e:"2026-04-15",desc:"Upload docs selon type affiliation, processus pas-à-pas",status:"🟡 60% - En cours"},
+    {label:"Support authentification MyMaroclear", s:"2026-04-10",e:"2026-04-28",desc:"Guide MFA, mot de passe oublié, réinitialisation",status:"⏳ En attente"},
+    {label:"Tests scénarios complets Agent 1", s:"2026-05-01",e:"2026-05-10",desc:"Validation parcours affiliés: affiliation + support",status:"⏳ À venir"},
   ]},
   
-  {label:"NLP & Classification", start:"2026-03-20",end:"2026-05-10",deps:[1,2],
+  {label:" Agent 2 : Conseiller Réglementaire", start:"2026-03-20",end:"2026-05-01",deps:[1],
    tasks:[
-    {label:" Benchmark méthodes classification", s:"2026-03-20",e:"2026-03-28",desc:"SVM, Random Forest, Logistic Regression, zero-shot LLM",status:"✅ Terminé"},
-    {label:" Modèle Régression Logistique testé", s:"2026-03-26",e:"2026-04-08",desc:"Meilleur compromis précision/vitesse sur données initiales",status:"✅ POC validé"},
-    {label:" Prompt engineering (zero/few-shot)", s:"2026-04-05",e:"2026-04-20",desc:"Prompts explicatifs nuances métier: Incident/Demande/Réclamation",status:"🟡 50% - En cours"},
-    {label:" Classification avancée", s:"2026-04-15",e:"2026-05-05",desc:"Bloquant: besoin données plus significatifs pour fine-tuning",status:"🔴 Bloquant - En attente meeting"},
-    {label:" Évaluation performances finales", s:"2026-05-05",e:"2026-05-10",desc:"F1-score, matrice confusion, validation métier",status:"⏳ En attente données"},
+    {label:"POC RAG réglementaire (2 sources)", s:"2026-03-20",e:"2026-04-05",desc:"Dahirs + Règlement Général - Architecture validée",status:"✅ POC validé"},
+    {label:"Chunking AMMC Recueil (857 pages)", s:"2026-04-01",e:"2026-04-22",desc:"Stratégie semantic chunking, overlap, metadata tagging",status:"🟡 95% En cours"},
+    {label:"Indexation ChromaDB complète", s:"2026-04-23",e:"2026-04-24",desc:"3 sources: Dahirs + RG + AMMC",status:"⏳ Dépend chunking"},
+    {label:"Optimisation retriever réglementaire", s:"2026-04-27",e:"2026-04-29",desc:"Hybrid search, re-ranking, précision juridique",status:"⏳ À venir"},
+    {label:"Tests qualité réponses juridiques", s:"2026-04-30",e:"2026-05-01",desc:"Recall@K, pertinence métier, hallucinations",status:"⏳ À venir"},
   ]},
   
-  {label:"Développement Agents IA", start:"2026-04-15",end:"2026-05-18",deps:[2,3],
+  {label:" Agent 3 : Support & Classification", start:"2026-03-25",end:"2026-05-05",deps:[1],
    tasks:[
-    {label:" Agent Classification (données réelles)", s:"2026-04-25",e:"2026-05-08",desc:"Fine-tuning modèle avec données GLPI enrichies",status:"⏳ En attente données"},
-    {label:" Calcul priorité P1-P4 + Email dispatcher", s:"2026-04-25",e:"2026-05-08",desc:"Algorithme scoring + notification automatique",status:"🔴 À développer"},
-    {label:" RAG Réglementaire AMMC complet", s:"2026-04-25",e:"2026-05-10",desc:"Intégration chunking + indexation + retriever optimisé",status:"⏳ Dépend chunking"},
-    {label:" RAG Affiliation (guide + upload docs)", s:"2026-05-01",e:"2026-05-15",desc:"Indexation processus affiliation, guide conversationnel",status:"🔴 En attente documents métier"},
-    {label:" Agent Orchestrateur (routing basique)", s:"2026-05-05",e:"2026-05-15",desc:"Détection intention → routage vers agent spécialisé",status:"🔴 Architecture définie, non codé"},
-    {label:" Guide mot de passe oublié (RAG Général+)", s:"2026-05-08",e:"2026-05-18",desc:"Module d'aide pas-à-pas: MFA, CGU, réinitialisation",status:"🔴 À développer"},
+    {label:"Benchmark méthodes classification", s:"2026-03-25",e:"2026-04-02",desc:"SVM, Random Forest, Logistic Regression, zero-shot LLM",status:"✅ Terminé"},
+    {label:"Modèle Régression Logistique testé", s:"2026-03-28",e:"2026-04-10",desc:"Meilleur compromis précision/vitesse sur données initiales",status:"✅ POC validé"},
+    {label:"Extraction champs structurés", s:"2026-04-15",e:"2026-04-30",desc:"Service, système impacté, priorité, résumé auto",status:"🟡 80% En cours"},
+    {label:"Prompt engineering classification", s:"2026-04-20",e:"2026-04-25",desc:"Prompts explicatifs nuances: Incident/Demande/Réclamation",status:"🟡 50% - En cours"},
+    {label:"Évaluation performances finales", s:"2026-05-01",e:"2026-05-05",desc:"F1-score, matrice confusion, validation métier",status:"⏳ En attente données"},
   ]},
   
-  {label:"Intégration & Interface", start:"2026-04-25",end:"2026-06-05",deps:[4],
+  {label:" Agent 4 : Auto-Dispatcher", start:"2026-03-26",end:"2026-05-20",deps:[4],
    tasks:[
-    {label:" Simulation React complète (blueprint)", s:"2026-03-01",e:"2026-04-14",desc:"Interface + flux conversationnels + auto-fill page incidents",status:"✅ Terminé - Accélérateur intégration"},
-    {label:" Auto-fill: pages demande/réclamation", s:"2026-05-01",e:"2026-05-18",desc:"Extension logique à toutes pages (attente screenshots)",status:"🔴 En attente maquettes pages"},
-    {label:" Widget flottant: intégration portail public + MyMaroclear", s:"2026-05-08",e:"2026-05-25",desc:"Composant injectable, gestion état connexion",status:"🔴 À développer"},
+    {label:"Auto-remplissage champs formulaires", s:"2026-03-26",e:"2026-04-10",desc:"Pré-remplissage depuis données extraites Agent 3",status:"✅ Terminé"},
+    {label:"Navigation auto vers pages MyMaroclear", s:"2026-04-25",e:"2026-05-05",desc:"Routing: incident→page incident, réclamation→page réclamation",status:"🔴 À développer"},
+    {label:"Algorithme calcul priorité P1-P4", s:"2026-05-01",e:"2026-05-15",desc:"Scoring basé sur règles métier (impact, urgence)",status:"🔴 À développer"},
+    {label:"Email automatique dispatcher", s:"2026-05-10",e:"2026-05-20",desc:"Notification avec priorité + résumé problème",status:"🔴 À développer"},
   ]},
   
-  {label:"Tests & Optimisation", start:"2026-05-25",end:"2026-06-15",deps:[5],
+  {label:" Agent 5 : Orchestrateur", start:"2026-05-01",end:"2026-05-25",deps:[2,3,4,5],
    tasks:[
-    {label:" Tests utilisateurs (scénarios complets)", s:"2026-05-25",e:"2026-06-05",desc:"Validation parcours: visiteur, affilié, dispatcher",status:"⏳ Dépend intégration"},
-    {label:" Optimisation performances RAG", s:"2026-06-01",e:"2026-06-10",desc:"Latence, cache sémantique, batching requêtes",status:"⏳ À venir"},
-    {label:" Base connaissance N1 (FAQs)", s:"2026-06-05",e:"2026-06-12",desc:"Documentation questions fréquentes + réponses validées",status:"⏳ En attente validation métier"},
-    {label:" Ajustements post-tests", s:"2026-06-10",e:"2026-06-15",desc:"Corrections bugs, amélioration UX, fine-tuning",status:"⏳ À venir"},
+    {label:"Détection intention utilisateur", s:"2026-05-01",e:"2026-05-10",desc:"Classification haute niveau: support/réglementaire/incident",status:"🔴 Architecture définie, non codé"},
+    {label:"Routage intelligent vers agents", s:"2026-05-08",e:"2026-05-18",desc:"Sélection agent spécialisé selon contexte",status:"🔴 À développer"},
+    {label:"Gestion contexte conversationnel", s:"2026-05-15",e:"2026-05-25",desc:"Mémoire court terme, handoff entre agents",status:"🔴 À développer"},
   ]},
   
-  {label:" Rapport PFE - Présentation de soutenance", start:"2026-04-15",end:"2026-07-10",deps:[],
+{label:" Intégration & Interface Utilisateur", start:"2026-03-01",end:"2026-06-10",deps:[2,3,4,5,6],
+ tasks:[
+  {label:" Widget flottant (simulation React)", s:"2026-03-01",e:"2026-03-20",desc:"Composant React fonctionnel - prêt pour intégration",status:"✅ Terminé"},
+  {label:" Portail public - interface", s:"2026-03-15",e:"2026-04-01",desc:"Simulation interface visiteur - déjà codé",status:"✅ Terminé"},
+  {label:" Page Incidents MyMaroclear", s:"2026-04-01",e:"2026-04-14",desc:"Auto-fill page incidents - screenshots utilisés",status:"✅ Terminé"},
+  {label:" Pages Demande/Réclamation MyMaroclear", s:"2026-04-25",e:"2026-05-05",desc:"Bloquant: attente screenshots pages MyMaroclear manquantes",status:"🔴 En attente screenshots"},
+  {label:" Tests unitaires composants", s:"2026-05-05",e:"2026-05-15",desc:"Tests widget, routing, gestion contexte - déjà codé",status:"⏳ À faire"},
+  {label:" Intégration environnement TEST", s:"2026-05-20",e:"2026-06-10",desc:"Déploiement sur env test Maroclear + validation",status:"⏳ Avant soutenance"},
+  {label:" Documentation technique", s:"2026-06-01",e:"2026-06-20",desc:"Guides intégration, API, maintenance",status:"⏳ En cours"},
+ ]},
+  
+  {label:"Phase 4 : Tests & Optimisation", start:"2026-06-01",end:"2026-06-18",deps:[7],
    tasks:[
-    {label:" Rapport FINALISÉ ", s:"2026-04-15",e:"2026-05-31",desc:"Version finale validée par encadrant",status:"⏳ Jalon critique",milestone:true},
-    {label:" Présentation de soutenance ", s:"2026-05-10",e:"2026-07-10",desc:"Version finale validée par encadrant",status:"⏳ Jalon critique",milestone:true},
+    {label:"Tests utilisateurs (scénarios complets)", s:"2026-06-01",e:"2026-06-10",desc:"Validation parcours: visiteur, affilié, dispatcher",status:"⏳ Dépend intégration"},
+    {label:"Optimisation performances RAG", s:"2026-06-05",e:"2026-06-15",desc:"Latence, cache sémantique, batching requêtes",status:"⏳ À venir"},
+    {label:"Ajustements post-tests", s:"2026-06-12",e:"2026-06-18",desc:"Corrections bugs, amélioration UX, fine-tuning",status:"⏳ À venir"},
   ]},
   
-  {label:" Post-Soutenance - Intégration Prod", start:"2026-07-11",end:"2026-08-08",deps:[6,7],
+  {label:" Rapport PFE & Soutenance", start:"2026-04-15",end:"2026-06-20",deps:[],
    tasks:[
-    {label:" Déploiement environnement production", s:"2026-07-11",e:"2026-07-25",desc:"Migration depuis environnement test, configuration sécurité",status:"⏳ Post-soutenance"},
-    {label:" Tests réels utilisateurs (affiliés)", s:"2026-07-25",e:"2026-08-05",desc:"Collecte feedback, mesure satisfaction, détection bugs prod",status:"⏳ Post-soutenance"},
-    {label:" Documentation complète (utilisateurs + admin)", s:"2026-05-10",e:"2026-07-31",desc:"Guides d'utilisation, procédures maintenance, FAQ technique",status:"⏳ Post-soutenance"},
-    {label:" Maintenance & améliorations continues", s:"2026-07-20",e:"2026-08-08",desc:"Corrections bugs, optimisations, features additionnelles si temps",status:"⏳ Post-soutenance"},
-    {label:" Handover & transfert de compétences", s:"2026-08-01",e:"2026-08-08",desc:"Formation équipe Maroclear, documentation transfert, clôture stage",status:"⏳ Fin de stage"},
+    {label:"Rédaction rapport (itératif)", s:"2026-04-15",e:"2026-06-10",desc:"Chapitres au fur et à mesure de l'avancement",status:"🟡 40% - En cours"},
+    {label:"Présentation soutenance", s:"2026-06-01",e:"2026-06-18",desc:"Slides, démo live, préparation oral",status:"⏳ À venir"},
   ]},
+  
+ {label:"Phase 5 : Post-Soutenance → Production", start:"2026-07-01",end:"2026-08-09",deps:[9],
+ tasks:[
+   {label:" Documentation utilisateurs", s:"2026-07-01",e:"2026-07-31",desc:"Guides utilisateurs finaux + FAQ",status:"⏳ Post-soutenance"},
+   {label:" Intégration environnement PROD", s:"2026-07-10",e:"2026-07-20",desc:"Migration depuis TEST vers PROD + config sécurité",status:"⏳ Post-soutenance"},
+  {label:" Tests utilisateurs réels", s:"2026-07-20",e:"2026-07-31",desc:"Feedback affiliés, mesure satisfaction, bugs prod",status:"⏳ Post-soutenance"},
+  {label:" Handover équipe Maroclear", s:"2026-08-01",e:"2026-08-09",desc:"Formation + transfert compétences + clôture",status:"⏳ Fin stage"},
+ ]},
 ];
 
 const MILESTONES=[
-  {label:"Architecture validée", date:"2026-03-01",color:"#2c4a9e",desc:"Cadrage & stack technique approuvés"},
-  {label:"POCs RAG + Classification", date:"2026-04-12",color:"#1578b8",desc:"Pipeline RAG & modèle classification testés"},
-  {label:"Intégration test terminée", date:"2026-06-05",color:"#1e40af",desc:"Système déployé sur environnement test"},
-  {label:" SOUTENANCE", date:"2026-06-20",color:"#1d6b52",desc:"Présentation finale + démo live + rapport"},
-  {label:" Stage terminé", date:"2026-08-08",color:"#4a5568",desc:"Livraison production + documentation + handover"},
+  {label:"Architecture validée", date:"2026-03-15",color:"#2c4a9e",desc:"Cadrage & stack technique approuvés"},
+  {label:"5 Agents développés", date:"2026-05-25",color:"#1e40af",desc:"Tous les agents fonctionnels individuellement"},
+  {label:"Intégration test", date:"2026-06-10",color:"#1d6b52",desc:"Système déployé sur environnement test"},
+  {label:"SOUTENANCE", date:"2026-06-20",color:"#c81e32",desc:"Présentation finale du PFE"},
+  {label:"Intégration Prod terminée", date:"2026-07-20",color:"#1d6b52",desc:"Système déployé sur environnement Prod"},
+  {label:"Stage terminé", date:"2026-08-09",color:"#4a5568",desc:"Livraison production + documentation + handover"},
 ];
 
 const DEPS=[];
@@ -403,7 +444,7 @@ function tipify(el,title,dates,desc,status,color){
 }
 function mv(e){
   const x=e.clientX+16,y=e.clientY-8;
-  tip.style.left=Math.min(x,window.innerWidth-298)+'px';
+  tip.style.left=Math.min(x,window.innerWidth-336)+'px';
   tip.style.top=Math.max(8,y-tip.offsetHeight/2)+'px';
 }
 
@@ -424,10 +465,16 @@ function renderAll(){
 
     const row=document.createElement('div');row.className='phase-row';
     const lbl=document.createElement('div');lbl.className='phase-label';
+    
+    // Badge spécial pour les agents
+    const isAgent = phase.label.includes(' Agent');
+    const badgeHtml = isAgent ? '<span class="agent-badge">AGENT</span>' : '';
+    
     lbl.innerHTML=`
       <div class="phase-accent-bar" style="background:${HEX[i]}"></div>
       <span class="phase-index">${String(i+1).padStart(2,'0')}</span>
-      <span class="phase-name" style="color:${HEX[i]}">${phase.label}</span>
+      <span class="phase-name" style="color:${HEX[i]}">${phase.label.replace(' ','')}</span>
+      ${badgeHtml}
       <span class="phase-count">${phase.tasks.length}</span>
       <span class="phase-chevron">▶</span>`;
 
@@ -576,11 +623,6 @@ document.getElementById('toggle-all-btn').addEventListener('click',function(){
 
 // ========== MISE À JOUR AUTOMATIQUE ==========
 updateHeaderStats();
-
-// --- CALCUL TEMPS ÉCOULÉ ---
-const elapsedPct = Math.round(((TODAY - PS) / (PE - PS)) * 100);
-document.getElementById('stat-elapsed').textContent = Math.max(0, Math.min(100, elapsedPct)) + '%';
-// ---------------------------
 
 window.addEventListener('resize',()=>setTimeout(drawArrows,50));
 renderAll();
