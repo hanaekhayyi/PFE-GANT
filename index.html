@@ -145,8 +145,6 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
   </div>
 </header>
 
-
-
 <div class="controls">
   <span class="ctrl-label">Filtrer :</span>
   <button class="filter-btn active" data-filter="all">Tout</button>
@@ -183,7 +181,6 @@ h1{font-size:clamp(20px,2.8vw,30px);font-weight:800;letter-spacing:-.025em;line-
 
   <div class="legend-section">
     <span class="legend-title"></span>
-  
     <div class="legend-item"><div class="l-today" id="legend-today"></div>Aujourd'hui</div>
   </div>
 </div>
@@ -216,25 +213,20 @@ function calcAutoProgress(){
   
   PHASES.forEach(phase => {
     phase.tasks.forEach(task => {
-      // 1. Calculer la durée de la tâche en jours
       const startDate = d2d(task.s);
       const endDate = d2d(task.e);
-      // On ajoute +1 pour inclure le jour de fin dans le calcul
       const duration = Math.max(1, (endDate - startDate) / 86400000 + 1); 
-      
-      // 2. Déterminer le facteur d'avancement (0 à 1)
       const status = (task.status || '').trim();
       let completionFactor = 0;
       
       if(status.startsWith('✅')){
-        completionFactor = 1; // 100%
+        completionFactor = 1;
       }
       else if(status.startsWith('🟡')){
         const match = status.match(/(\d+)%/);
-        completionFactor = match ? parseInt(match[1])/100 : 0.5; // % spécifié ou 50%
+        completionFactor = match ? parseInt(match[1])/100 : 0.5;
       }
 
-      // 3. Pondération : Multiplier la durée par l'avancement
       totalWeight += duration;
       earnedWeight += (duration * completionFactor);
     });
@@ -266,7 +258,6 @@ function updateHeaderStats(){
   
   document.getElementById('stat-date').textContent=fmtFull(TODAY);
   
-  // Jours avant soutenance
   if(daysLeft>0){
     document.getElementById('stat-days').textContent=daysLeft+'j';
   }else if(daysLeft===0){
@@ -275,7 +266,6 @@ function updateHeaderStats(){
     document.getElementById('stat-days').textContent='Terminé';
   }
   
-  // Jours avant fin de stage
   if(daysLeftStage>0){
     document.getElementById('stat-days-stage').textContent=daysLeftStage+'j';
   }else if(daysLeftStage===0){
@@ -284,22 +274,19 @@ function updateHeaderStats(){
     document.getElementById('stat-days-stage').textContent='Terminé';
   }
   
-  // Légende aujourd'hui
   const legendToday=document.getElementById('legend-today');
   legendToday.parentElement.lastChild.textContent='Aujourd\'hui ('+fmtFull(TODAY)+')';
   
-  // Sous-titre header
   document.getElementById('header-subtitle').textContent=
     fmtFull(PS)+' → '+fmtFull(PE)+' · '+fmtFull(TODAY)+' · '+
     (daysLeft>0?daysLeft+'j avant soutenance':'Soutenance passée')+' · '+
     (daysLeftStage>0?daysLeftStage+'j avant fin stage':'Stage terminé');
   
-  // Temps écoulé
   const elapsedPct = Math.round(((TODAY - PS) / (PE - PS)) * 100);
   document.getElementById('stat-elapsed').textContent = Math.max(0, Math.min(100, elapsedPct)) + '%';
 }
 
-const HEX=['#2c4a9e','#1864ab','#1578b18','#0d8a9a','#2b6cb0','#3d5a99','#1e40af','#1d6b52','#4a6fa5','#4a5568','#6b7280'];
+const HEX=['#2c4a9e','#1864ab','#6b7280','#0d8a9a','#2b6cb0','#3d5a99','#1e40af','#1d6b52','#4a6fa5','#4a5568','#6b7280'];
 
 const PHASES=[
   {label:"Phase 1 : Cadrage & Conception Globale", start:"2026-02-09",end:"2026-03-15",deps:[],
@@ -404,22 +391,68 @@ const MILESTONES=[
 
 const DEPS=[];
 
-const MONTHS=[{l:"Fév",y:2026,m:1},{l:"Mars",y:2026,m:2},{l:"Avr",y:2026,m:3},
-              {l:"Mai",y:2026,m:4},{l:"Juin",y:2026,m:5},{l:"Juil",y:2026,m:6},{l:"Août",y:2026,m:7}];
+// ========== CORRECTION PRINCIPALE : LARGEURS PROPORTIONNELLES ==========
+// On calcule la largeur de chaque mois en fonction de son nombre de jours réels
+const MONTHS=[
+  {l:"Fév",y:2026,m:1,days:20},   // du 9 fév au 28 fév = 20 jours (inclusif: 28-9+1=20)
+  {l:"Mars",y:2026,m:2,days:31},  // 31 jours
+  {l:"Avr",y:2026,m:3,days:30},   // 30 jours
+  {l:"Mai",y:2026,m:4,days:31},   // 31 jours
+  {l:"Juin",y:2026,m:5,days:30},  // 30 jours (jusqu'au 20 juin pour la soutenance, mais on va jusqu'au 30 pour la timeline)
+  {l:"Juil",y:2026,m:6,days:31},  // 31 jours
+  {l:"Août",y:2026,m:7,days:9}    // du 1er au 9 août = 9 jours
+];
+
+// Recalculer les jours exacts pour chaque mois basé sur PS et PE
+function getMonthInfo(year, month, startDay, endDay) {
+  const start = new Date(year, month, startDay);
+  const end = new Date(year, month, endDay);
+  return {
+    l: ['Fév','Mars','Avr','Mai','Juin','Juil','Août'][month-1],
+    y: year,
+    m: month-1, // 0-based pour JS Date
+    start: start,
+    end: end,
+    days: (end - start) / 86400000 + 1,
+    width: ((end - start) / 86400000 + 1) / TD * 100
+  };
+}
+
+// Recalcul précis des mois
+const MONTHS_PRECIS = [
+  getMonthInfo(2026, 1, 9, 28),   // Fév: 9→28 = 20j
+  getMonthInfo(2026, 2, 1, 31),   // Mars: 1→31 = 31j
+  getMonthInfo(2026, 3, 1, 30),   // Avr: 1→30 = 30j
+  getMonthInfo(2026, 4, 1, 31),   // Mai: 1→31 = 31j
+  getMonthInfo(2026, 5, 1, 30),   // Juin: 1→30 = 30j
+  getMonthInfo(2026, 6, 1, 31),   // Juil: 1→31 = 31j
+  getMonthInfo(2026, 7, 1, 9),    // Août: 1→9 = 9j
+];
+
 const mhEl=document.getElementById('months-header');
-MONTHS.forEach(mo=>{
-  const s=Math.max(0,(new Date(mo.y,mo.m,1)-PS)/86400000);
-  const e=Math.min(TD,(new Date(mo.y,mo.m+1,0)-PS)/86400000+1);
-  const w=(e-s)/TD*100;
-  const c=document.createElement('div');c.className='month-cell';c.style.width=w+'%';c.textContent=mo.l;
+MONTHS_PRECIS.forEach(mo=>{
+  const c=document.createElement('div');c.className='month-cell';
+  c.style.width=mo.width+'%';
+  c.style.flex='none'; // Important: ne pas laisser flex gérer la largeur
+  c.textContent=mo.l;
   const wt=document.createElement('div');wt.className='week-ticks';
-  for(let i=0;i<4;i++){const t=document.createElement('div');t.className='week-tick';wt.appendChild(t);}
+  // Nombre de semaines approximatif pour les ticks
+  const numWeeks = Math.max(1, Math.floor(mo.days / 7));
+  for(let i=0;i<numWeeks;i++){
+    const t=document.createElement('div');t.className='week-tick';wt.appendChild(t);
+  }
   c.appendChild(wt);mhEl.appendChild(c);
 });
 
 function gridOv(){
   const ov=document.createElement('div');ov.className='grid-overlay';
-  MONTHS.forEach(()=>{const v=document.createElement('div');v.className='grid-v';ov.appendChild(v);});
+  MONTHS_PRECIS.forEach((mo)=>{
+    const v=document.createElement('div');
+    v.className='grid-v';
+    v.style.width=mo.width+'%';
+    v.style.flex='none';
+    ov.appendChild(v);
+  });
   return ov;
 }
 
@@ -466,7 +499,6 @@ function renderAll(){
     const row=document.createElement('div');row.className='phase-row';
     const lbl=document.createElement('div');lbl.className='phase-label';
     
-    // Badge spécial pour les agents
     const isAgent = phase.label.includes(' Agent');
     const badgeHtml = isAgent ? '<span class="agent-badge">AGENT</span>' : '';
     
@@ -614,7 +646,7 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
 document.getElementById('toggle-all-btn').addEventListener('click',function(){
   allOpen=!allOpen;
   PHASES.forEach((_,i)=>allOpen?openSet.add(i):openSet.delete(i));
-  this.textContent=allOpen?'▾ Tout réduire':'▸ Tout déployer';
+  this.textContent=allOpen?'▾ Tout réduire':'▸ Tout développer';
   document.querySelectorAll('.phase-group[data-phase]').forEach(g=>{
     g.classList.toggle('open',allOpen);
   });
